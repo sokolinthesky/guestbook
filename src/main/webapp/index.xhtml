@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+        <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+    <title>JSF 2.0 Hello World</title>
+</h:head>
+<h:body>
+    <h:form>
+        <h2><h:commandLink action="form" value="Add guest"/></h2>
+    </h:form>
+
+    <h2>JSF 2.0 List guests</h2>
+    <h:form>
+    <h:dataTable value="#{valuesBean.guestBeanList}" var="guest" border="1">
+            <h:column>
+                <f:facet name="header">FIRST NAME</f:facet>
+                <!--#{guest.fistName}-->
+
+                <h:inputText value="#{guest.fistName}" size="20" rendered="#{guest.editable}" />
+
+
+                <h:outputText value="#{guest.fistName}" rendered="#{not guest.editable}" />
+
+            </h:column>
+            <h:column>
+                <f:facet name="header">SECOND NAME</f:facet>
+                <!--#{guest.secondName}-->
+
+                <h:inputText value="#{guest.secondName}" size="20" rendered="#{guest.editable}" />
+
+
+                <h:outputText value="#{guest.secondName}" rendered="#{not guest.editable}" />
+
+            </h:column>
+            <h:column>
+                <f:facet name="header">PHONE NUMBER</f:facet>
+                <!--#{guest.phoneNumber}-->
+
+                <h:inputText value="#{guest.phoneNumber}" size="20" rendered="#{guest.editable}" />
+
+                <h:outputText value="#{guest.phoneNumber}" rendered="#{not guest.editable}" />
+
+            </h:column>
+            <h:column>
+                <f:facet name="header">ACTIONS</f:facet>
+
+                    <!--<h:commandButton value="Edit" action="editForm">
+                    </h:commandButton>-->
+                    <h:commandLink value="Edit" action="#{valuesBean.editAction(guest)}"
+                                   rendered="#{not guest.editable}" />
+
+                    <h:commandButton value="Delete" action="#{valuesBean.deleteGuest(guest)}"/>
+
+            </h:column>
+    </h:dataTable>
+    <h:commandButton value="Save Changes" action="#{valuesBean.saveAction}" />
+    </h:form>
+</h:body>
+</html>
